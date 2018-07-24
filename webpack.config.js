@@ -95,6 +95,7 @@ module.exports = [
         entry: {
             'lib.min': ['react', 'react-dom'],
             'gui': './src/playground/index.jsx',
+            'mirror': './src/lib/dom_mirror/mirror/index.jsx',
             'blocksonly': './src/playground/blocks-only.jsx',
             'compatibilitytesting': './src/playground/compatibility-testing.jsx',
             'player': './src/playground/player.jsx'
@@ -138,6 +139,12 @@ module.exports = [
                 template: 'src/playground/index.ejs',
                 title: 'Scratch 3.0 GUI',
                 sentryConfig: process.env.SENTRY_CONFIG ? '"' + process.env.SENTRY_CONFIG + '"' : null
+            }),
+            new HtmlWebpackPlugin({
+                chunks: ['lib.min', 'mirror'],
+                template: 'src/lib/dom_mirror/mirror/index.ejs',
+                title: 'Mirror Scratch 3.0 GUI',
+                filename: 'mirror.html'
             }),
             new HtmlWebpackPlugin({
                 chunks: ['lib.min', 'blocksonly'],
