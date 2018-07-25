@@ -141,7 +141,7 @@ module.exports = [
                 sentryConfig: process.env.SENTRY_CONFIG ? '"' + process.env.SENTRY_CONFIG + '"' : null
             }),
             new HtmlWebpackPlugin({
-                chunks: ['lib.min', 'mirror'],
+                chunks: ['mirror'],
                 template: 'src/lib/dom_mirror/mirror/index.ejs',
                 title: 'Mirror Scratch 3.0 GUI',
                 filename: 'mirror.html'

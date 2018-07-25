@@ -27,27 +27,30 @@ const MirrorHOC = function (WrappedComponent) {
             //     return;
             // }
             // localStorage.setItem('ccc', 'ccc');
+            this._if = document.getElementById('ifroot')
+            this._ifdoc = this._if.contentDocument
 
 
             this.socket = new WebSocket('ws://localhost:8080/receiver');
             this.socket.onopen = () => {
                 this.socket.send(JSON.stringify({ base: location.href.match(/^(.*\/)[^\/]*$/)[1] }));
 
-                this.receiver = new DomTreeDeserializer(document, {
-                    createElement: function(nodeData, tagName, parent) {
-                        if (tagName == 'SCRIPT') {
-                            var node = document.createElement('NO-SCRIPT');
-                            node.style.display = 'none';
-                            return node;
-                        }
+                this.receiver = new DomTreeDeserializer(this._ifdoc, {
+                    // createElement: function(nodeData, tagName, parent) {
+                        // if (tagName == 'SCRIPT') {
+                        //     console.log('--------- ', nodeData);
+                        //     var node = document.createElement('NO-SCRIPT');
+                        //     node.style.display = 'none';
+                        //     return node;
+                        // }
 
-                        if (tagName == 'HEAD') {
-                            var node = document.createElement('HEAD');
-                            node.appendChild(document.createElement('BASE'));
-                            node.firstChild.href = this.base;
-                            return node;
-                        }
-                    }
+                        // if (tagName == 'HEAD') {
+                        //     var node = document.createElement('HEAD');
+                        //     node.appendChild(document.createElement('BASE'));
+                        //     node.firstChild.href = this.base;
+                        //     return node;
+                        // }
+                    // }
                 });
             };
 
@@ -70,8 +73,8 @@ const MirrorHOC = function (WrappedComponent) {
 
         handleMessage(msg) {
             if (msg.clear) {
-                while (document.firstChild) {
-                    document.removeChild(document.firstChild);
+                while (this._ifdoc.firstChild) {
+                    this._ifdoc.removeChild(this._ifdoc.firstChild);
                 }
             } else if (msg.base) {
                 this.base = msg.base;

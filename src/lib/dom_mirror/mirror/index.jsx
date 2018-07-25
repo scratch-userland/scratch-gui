@@ -6,7 +6,7 @@ import 'intl'; // For Safari 9
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import analytics from '../../analytics';
+// import analytics from '../../analytics';
 import MirrorHOC from '../mirror-hoc.jsx'
 
 import styles from './index.css';
@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
 }
 
 // Register "base" page view
-analytics.pageview('/');
+// analytics.pageview('/');
 
 class FakeGUI extends React.Component {
     constructor(props) {
