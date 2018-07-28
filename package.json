@@ -2,11 +2,12 @@
   "name": "scratch-gui",
   "version": "0.1.0",
   "description": "GraphicaL User Interface for creating and running Scratch 3.0 projects",
-  "main": "./dist/scratch-gui.js",
+  "main": "./src/client/main.js",
   "scripts": {
     "build": "npm run clean && webpack --progress --colors --bail",
     "clean": "rimraf ./build && mkdirp build && rimraf ./dist && mkdirp dist",
     "deploy": "touch build/.nojekyll && gh-pages -t -d build -m \"Build for $(git log --pretty=format:%H -n1)\"",
+    "electron": "electron . --debug --enable-logging",
     "prune": "./prune-gh-pages.sh",
     "i18n:src": "babel src > tmp.js && rimraf tmp.js && build-i18n-src ./translations/messages/src ./translations/",
     "start": "webpack-dev-server",
@@ -19,7 +20,7 @@
   },
   "author": "Massachusetts Institute of Technology",
   "license": "BSD-3-Clause",
-  "homepage": "https://github.com/LLK/scratch-gui#readme",
+  "homepage": ".",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/LLK/scratch-gui.git"
@@ -46,6 +47,7 @@
     "copy-webpack-plugin": "^4.5.1",
     "core-js": "2.5.7",
     "css-loader": "^1.0.0",
+    "electron": "1.8.4",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "1.1.1",
     "es6-object-assign": "1.1.0",
