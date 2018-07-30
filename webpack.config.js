@@ -13,6 +13,7 @@ var postcssVars = require('postcss-simple-vars');
 var postcssImport = require('postcss-import');
 
 const base = {
+    target: 'electron-renderer',
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
     devtool: 'cheap-module-source-map',
     devServer: {
